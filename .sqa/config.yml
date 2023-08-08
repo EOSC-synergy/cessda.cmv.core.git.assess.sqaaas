@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.cmv.core:
+      branch: main
+      repo: https://github.com/cessda/cessda.cmv.core.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.cmv.core git:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-charcoal-tapir.sh
+        container: qc.acc_sloppy-xanthic-raccoon
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.cmv.core find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.tasty-chartreuse-dugong.sh
+        container: qc.doc_lousy-xanthic-echidna
+      github.com/cessda/cessda.cmv.core git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-lilac-toucan.sh
+        container: qc.doc_stuffy-fuchsia-earwig
+      github.com/cessda/cessda.cmv.core markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.frumpy-violet-dane.sh
+        container: qc.doc_dorky-blue-deer
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.cmv.core licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-seashell-cassowary.sh
+        container: qc.lic_trippy-firebrick-slug
+  QC.Met:
+    repos:
+      github.com/cessda/cessda.cmv.core cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.tasty-xanthic-dolphin.sh
+        container: qc.met_skimpy-olivine-octopus
+  QC.Sty:
+    repos:
+      github.com/cessda/cessda.cmv.core checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.geeky-sangria-octopus.sh
+        container: qc.sty_homey-malachite-albatross
+      github.com/cessda/cessda.cmv.core jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-amber-dachshund.sh
+        container: qc.sty_lumpy-myrtle-buffalo
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.cmv.core get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-black-binturong.sh
+        container: qc.ver_baggy-gold-mau
+timeout: 5400
